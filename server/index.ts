@@ -14,12 +14,6 @@ import indexRouter from './routers/index';
 
 const app = new Koa();
 
-// app.use(views(path.join(__dirname, config.isDev ? '../dev/server-templates' : '../server-templates'), {
-//   map: {
-//     html: 'handlebars'
-//   }
-// }));
-
 app.use(async (ctx, next) => {
   if (ctx.url.startsWith('/api')) {
     ctx.respond = false;
@@ -54,10 +48,5 @@ app.use(serve(path.join(__dirname, (config.isDev ? '../src' : '../dist/static'))
 app.use(kcors());
 app.use(bodyParser());
 if (config.isDev) app.use(logger());
-
-// config.isDev && process.on('SIGINT', () => {
-//   fs.removeSync('dev');
-//   process.exit(0);
-// });
 
 app.listen(appConfig.port.server);
