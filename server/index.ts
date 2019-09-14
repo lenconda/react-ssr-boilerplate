@@ -8,6 +8,7 @@ import serve from 'koa-static';
 import proxy from 'http-proxy-middleware';
 import connect from 'koa2-connect';
 import glob from 'glob';
+import render from './middlewares/render';
 import appConfig from '../config.json';
 
 import indexRouter from './routers/index';
@@ -28,6 +29,8 @@ app.use(async (ctx, next) => {
   }
   await next();
 });
+
+app.use(render(path.join(__dirname, '../templates')));
 
 app.use(indexRouter.routes()).use(indexRouter.allowedMethods());
 glob

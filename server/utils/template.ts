@@ -3,15 +3,15 @@ import fs from 'fs-extra';
 import path from 'path';
 import config from '../../config.json';
 
-export const injectTemplate = (relativeFilePath: string, entry: string) => {
+export const injectTemplate = (content: string, entry: string) => {
   const manifestPath = path.join(__dirname, '../../dist/manifest.json');
 
   const manifest = JSON.parse(fs.readFileSync(manifestPath, { encoding: 'utf8' }) || '{}');
 
   const prefix = process.env.NODE_ENV === 'production' ? '' : `http://localhost:${config.port.bundle}`;
 
-  const rawTemplate = fs.readFileSync(path.join(process.cwd(), 'templates', relativeFilePath));
-  const $ = cheerio.load(rawTemplate);
+  // const rawTemplate = fs.readFileSync(path.join(process.cwd(), 'templates', content));
+  const $ = cheerio.load(content);
 
   if (process.env.NODE_ENV === 'production') {
     if (manifest[entry]) {
