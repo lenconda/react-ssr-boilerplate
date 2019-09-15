@@ -11,7 +11,7 @@ import glob from 'glob';
 import render from './middlewares/render';
 import appConfig from '../config.json';
 
-import indexRouter from './routers/index';
+import router from './routers/index';
 
 const app = new Koa();
 
@@ -32,7 +32,8 @@ app.use(async (ctx, next) => {
 
 app.use(render(path.join(__dirname, '../templates')));
 
-app.use(indexRouter.routes()).use(indexRouter.allowedMethods());
+app.use(router.routes()).use(router.allowedMethods());
+
 glob
   .sync(path.join(__dirname, './routers/**/index.*'), {
     realpath: true,

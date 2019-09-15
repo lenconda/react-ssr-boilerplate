@@ -1,11 +1,17 @@
 import Router from 'koa-router';
 
-const indexRouter = new Router();
+const router = new Router();
 
-indexRouter.get('/', async (ctx, next) => {
+router.get('/', async (ctx, next) => {
   ctx.render('index.html', 'app__root', {
-    title: 'fuck'
+    title: 'app'
   });
 });
 
-export default indexRouter;
+router.get('/hello', async (ctx, next) => {
+  ctx.render('index.html', 'hello', {
+    title: 'hello'
+  });
+});
+
+export default router;

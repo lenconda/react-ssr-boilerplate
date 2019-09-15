@@ -10,9 +10,9 @@
   "author": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:server": "nodemon server/index.ts",
-    "start:bundle": "webpack-dev-server --config src/config/webpack.config.js --hot --inline --mode development",
-    "start": "cross-env NODE_ENV=development npm run start:bundle | npm run start:server",
+    "start:server": "cross-env NODE_ENV=development nodemon server/index.ts",
+    "start:bundle": "cross-env NODE_ENV=development webpack-dev-server --config src/config/webpack.config.js --hot --inline --mode development",
+    "start": "npm run start:bundle | npm run start:server",
     "build:bundle:dev": "cross-env NODE_ENV=development webpack --config src/config/webpack.config.js --mode development",
     "build:bundle:prod": "cross-env NODE_ENV=production webpack --config src/config/webpack.config.js --mode production",
     "build": "npm run clean && npm run build:bundle:prod",
