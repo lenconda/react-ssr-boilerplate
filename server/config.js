@@ -2,7 +2,7 @@ const env = process.env.NODE_ENV || 'development';
 const isProduction = env.toLowerCase() === 'production';
 const isDev = env.toLowerCase() === 'development';
 const isTest = env.toLowerCase() === 'test';
-import packageJson from '../package.json';
+const packageJson = require('../package.json');
 
 const config = {
   env: env,
@@ -12,4 +12,4 @@ const config = {
   productName: packageJson.name,
 };
 
-export default config;
+exports = module.exports = config;

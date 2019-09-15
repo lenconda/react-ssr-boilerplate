@@ -1,16 +1,13 @@
-import path from 'path';
-import { injectTemplate } from '../utils/template';
-import handlebars from 'handlebars';
-import fs from 'fs-extra';
+const path = require('path');
+const { injectTemplate } = require('../utils/template');
+const handlebars = require('handlebars');
+const fs = require('fs-extra');
 
-const compiler: any = handlebars;
-
-export default (templateBasePath: string) => {
-
+exports = module.exports = templateBasePath => {
   return (ctx, next) => {
     if (ctx.render) return next();
 
-    ctx.response.render = ctx.render = (file: string, entry: string, options: object = {}) => {
+    ctx.response.render = ctx.render = (file, entry, options = {}) => {
       ctx.type = 'text/html';
       const raw = fs.readFileSync(path.join(templateBasePath, file), { encoding: 'utf8' });
       const source = injectTemplate(raw, entry);

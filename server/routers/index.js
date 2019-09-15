@@ -1,4 +1,4 @@
-import Router from 'koa-router';
+const Router = require('koa-router');
 
 const router = new Router();
 
@@ -14,4 +14,4 @@ router.get('/hello', async (ctx, next) => {
   });
 });
 
-export default router;
+exports = module.exports = router;

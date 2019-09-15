@@ -1,7 +1,7 @@
-import path from 'path';
-import glob from 'glob';
+const path = require('path');
+const glob = require('glob');
 
-export const getEntries = (searchPath: string, root: string) => {
+const getEntries = (searchPath, root) => {
   const files = glob.sync(searchPath);
 
   const entries = files.map((value, index) => {
@@ -9,9 +9,11 @@ export const getEntries = (searchPath: string, root: string) => {
     return {
       name: value.split('/')[value.split('/').length - 2],
       path: path.resolve('./', value),
-      route: relativePath.split('/').filter((value, index) => value !== 'index.tsx').join('/')
+      route: relativePath.split('/').filter((value, index) => value !== 'index.js').join('/')
     };
   });
 
   return entries;
 };
+
+exports = module.exports = { getEntries };

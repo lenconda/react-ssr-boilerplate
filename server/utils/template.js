@@ -1,19 +1,18 @@
-import cheerio from 'cheerio';
-import fs from 'fs-extra';
-import path from 'path';
-import config from '../../config.json';
+const cheerio = require('cheerio');
+const fs = require('fs-extra');
+const path = require('path');
+const config = require('../../config.json');
 
-export const injectTemplate = (content: string, entry: string) => {
-  const manifestPath = path.join(__dirname, '../../dist/manifest.json');
-
-  const manifest = JSON.parse(fs.readFileSync(manifestPath, { encoding: 'utf8' }) || '{}');
-
+const injectTemplate = (content, entry) => {
   const prefix = process.env.NODE_ENV === 'production' ? '' : `http://localhost:${config.port.bundle}`;
 
   // const rawTemplate = fs.readFileSync(path.join(process.cwd(), 'templates', content));
   const $ = cheerio.load(content);
 
   if (process.env.NODE_ENV === 'production') {
+    const manifestPath = path.join(__dirname, '../../dist/manifest.json');
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, { encoding: 'utf8' }) || '{}');
+
     if (manifest[entry]) {
       if (manifest[entry]['css']) {
         $('head').append(`<link rel="stylesheet" href="${prefix}${manifest[entry]['css']}"></link>`);
@@ -42,3 +41,5 @@ export const injectTemplate = (content: string, entry: string) => {
 
   return $.html();
 };
+
+exports = module.exports = { injectTemplate };

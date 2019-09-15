@@ -18,7 +18,7 @@ function getEntries(searchPath, root) {
     return {
       name: value.split('/')[value.split('/').length - 2],
       path: path.resolve('./', value),
-      route: relativePath.split('/').filter((value, index) => value !== 'index.tsx').join('/')
+      route: relativePath.split('/').filter((value, index) => value !== 'index.js').join('/')
     };
   });
 
@@ -26,7 +26,7 @@ function getEntries(searchPath, root) {
 }
 
 const entries = getEntries(
-  path.join(__dirname, '../pages/**/index.tsx'),
+  path.join(__dirname, '../pages/**/index.js'),
   path.join(__dirname, '../pages')
 );
 
@@ -50,7 +50,7 @@ const plugins = [
 
 module.exports = {
   entry: {
-    'app__root': path.join(__dirname, '../index.tsx'),
+    'app__root': path.join(__dirname, '../index.js'),
     ...Object.assign(...entries.map((value, index) => {
       const entryObject = {};
       entryObject[value.route.split('/').join('_')] = value.path;
@@ -89,7 +89,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', 'jsx']
+    extensions: ['.js', 'jsx']
   },
 
   module: {
@@ -97,14 +97,14 @@ module.exports = {
       {
         oneOf: [
           {
-            test: /\.(ts|js|tsx|jsx)?$/,
+            test: /\.(js|jsx)?$/,
             exclude: /node_modules/,
             use: {
               loader: 'babel-loader'
             },
           },
           {
-            test: /\.(ts|js|tsx|jsx)?$/,
+            test: /\.(js|jsx)?$/,
             exclude: /node_modules/,
             loader: require.resolve('babel-loader'),
             options: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const Hello = (): JSX.Element => {
+const Hello = () => {
   return (
     <p className="it-works">
       This is the /hello page!

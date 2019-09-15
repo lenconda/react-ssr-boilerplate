@@ -1,8 +1,5 @@
 module.exports = {
-  extends: [
-    'eslint-config-alloy/react',
-    'eslint-config-alloy/typescript'
-  ],
+  extends: ['eslint-config-alloy/react'],
   globals: {},
   parserOptions: {
     ecmaVersion: 2018,
@@ -16,16 +13,10 @@ module.exports = {
       'error',
       2
     ],
-    '@typescript-eslint/indent': 'off',
     'react/jsx-indent-props': [
       'error',
       2
     ],
-    '@typescript-eslint/explicit-member-accessibility': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/no-empty-interface': 'off',
-    '@typescript-eslint/consistent-type-assertions': 'off',
-    '@typescript-eslint/typedef': 'off',
     'react/jsx-indent': [
       'error',
       2

@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 axios.defaults.baseURL = '';
 axios.defaults.timeout = 3600000;
@@ -8,4 +8,4 @@ axios.interceptors.response.use(response => {
   if (error.response.data.message) { console.log(error.response.data.message) }
 });
 
-export default axios;
+exports = module.exports = axios;

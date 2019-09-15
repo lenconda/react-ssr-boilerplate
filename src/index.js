@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-const Index = (): JSX.Element => {
+const Index = () => {
   return (
     <p className="it-works">
       It works!

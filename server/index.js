@@ -1,17 +1,17 @@
-import path from 'path';
-import kcors from 'kcors';
-import Koa from 'koa';
-import bodyParser from 'koa-bodyparser';
-import logger from 'koa-logger';
-import config from './config';
-import serve from 'koa-static';
-import proxy from 'http-proxy-middleware';
-import connect from 'koa2-connect';
-import glob from 'glob';
-import render from './middlewares/render';
-import appConfig from '../config.json';
+const path = require('path');
+const kcors = require('kcors');
+const Koa = require('koa');
+const bodyParser = require('body-parser');
+const logger = require('koa-logger');
+const config = require('./config');
+const serve = require('koa-static');
+const proxy = require('http-proxy-middleware');
+const connect = require('koa2-connect');
+const glob = require('glob');
+const render = require('./middlewares/render');
+const appConfig = require('../config.json');
 
-import router from './routers/index';
+const router = require('./routers');
 
 const app = new Koa();
 
