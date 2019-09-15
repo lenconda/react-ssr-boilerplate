@@ -9,9 +9,12 @@ router.get('/', async (ctx, next) => {
 });
 
 router.get('/hello', async (ctx, next) => {
-  ctx.render('index.html', 'hello', {
-    title: 'hello'
-  });
+  // ctx.render('index.html', 'hello', {
+  //   title: 'hello'
+  // });
+  ctx.body = {
+    title: 'fuck you'
+  };
 });
 
 exports = module.exports = router;
