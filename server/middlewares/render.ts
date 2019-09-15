@@ -3,8 +3,6 @@ import { injectTemplate } from '../utils/template';
 import handlebars from 'handlebars';
 import fs from 'fs-extra';
 
-const compiler: any = handlebars;
-
 export default (templateBasePath: string) => {
 
   return (ctx, next) => {
