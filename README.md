@@ -8,7 +8,7 @@ This is a boilerplate for React.js using Webpack. With the help of Webpack multi
 
 ## Overview
 Item | Value
-- | -
+--- | ---
 **Name** | react-ssr-boilerplate
 **Description** | An boilerplate for server-side rendering based on React and Webpack
 **Author** | [lenconda](https://github.com/lenconda)
