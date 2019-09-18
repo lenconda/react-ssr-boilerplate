@@ -50,10 +50,10 @@ const plugins = [
 
 module.exports = {
   entry: {
-    'app__root': path.join(__dirname, '../index.tsx'),
+    'app__root': [path.join(__dirname, '../index.tsx')],
     ...Object.assign(...entries.map((value, index) => {
       const entryObject = {};
-      entryObject[value.route.split('/').join('_')] = value.path;
+      entryObject[value.route.split('/').join('_')] = [value.path];
       return entryObject;
     }))
   },

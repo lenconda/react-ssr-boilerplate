@@ -14,4 +14,8 @@ router.get('/hello', async (ctx, next) => {
   });
 });
 
+router.get('/test', async (ctx, next) => {
+  console.log(ctx.state.webpackStats.toJson().assetsByChunkName);
+});
+
 export default router;
