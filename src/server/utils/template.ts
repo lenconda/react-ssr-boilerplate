@@ -1,7 +1,7 @@
 import cheerio from 'cheerio';
 import fs from 'fs-extra';
 import path from 'path';
-import config from '../../config.json';
+import config from '../../../config/ports.config';
 
 export const injectTemplate = (content: string, entry: string) => {
   const prefix = process.env.NODE_ENV === 'production' ? '' : `http://localhost:${config.port.bundle}`;

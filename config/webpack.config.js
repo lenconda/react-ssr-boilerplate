@@ -7,8 +7,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const env = require('./env');
 const cssLoaders = require('./css_loaders');
-const AssetsWebpackPlugin = require('assets-webpack-plugin');
-const config = require('../../config.json');
+const LoadablePlugin = require('@loadable/webpack-plugin');
+const portsConfig = require('./ports.config');
 
 function getEntries(searchPath, root) {
   const files = glob.sync(searchPath);
@@ -26,22 +26,22 @@ function getEntries(searchPath, root) {
 }
 
 const entries = getEntries(
-  path.join(__dirname, '../pages/**/index.tsx'),
-  path.join(__dirname, '../pages')
+  path.join(__dirname, '../src/client/pages/**/index.tsx'),
+  path.join(__dirname, '../src/client/pages')
 );
 
 const plugins = [
   new MiniCssExtractPlugin({
     filename: 'static/css/' + (env.isDev ? '[name].css' : '[name].[contenthash].css'),
-    chunkFilename: 'static/css/' + (env.isDev ? 'static/css/[id].css' : '[id].[contenthash].css')
+    chunkFilename: 'static/css/' + (env.isDev ? '[id].css' : '[id].[contenthash].css')
   }),
 
   new TerserWebpackPlugin(),
 
   new CopyWebpackPlugin([
     {
-      from: path.resolve(__dirname, '../assets/'),
-      to: path.resolve(__dirname, (env.isDev ? '../../dev/' : '../../dist/') + 'static/assets')
+      from: path.resolve(__dirname, '../src/client/public'),
+      to: path.resolve(__dirname, '../dist/assets/public')
     }
   ]),
 
@@ -50,7 +50,7 @@ const plugins = [
 
 module.exports = {
   entry: {
-    'app__root': [path.join(__dirname, '../index.tsx')],
+    'app__root': [path.join(__dirname, '../src/client/index.tsx')],
     ...Object.assign(...entries.map((value, index) => {
       const entryObject = {};
       entryObject[value.route.split('/').join('_')] = [value.path];
@@ -59,17 +59,14 @@ module.exports = {
   },
 
   output: {
-    path: path.join(
-      __dirname,
-      (env.isDev ? '../../dev/' : '../../dist/') + 'bundle'
-    ),
+    path: path.join(__dirname, '../dist'),
     filename: 'static/js/' + (env.isDev ? '[name]-routes.js' : '[name]-routes.[contenthash].js'),
     chunkFilename: 'static/js/' + (env.isDev ? '[name].chunk.js' : '[name].[contenthash].chunk.js'),
     publicPath: '/'
   },
 
   devServer: {
-    port: config.port.bundle,
+    port: portsConfig.port.bundle,
     hot: true,
     inline: true
   },
@@ -136,9 +133,8 @@ module.exports = {
     ? [
       ...plugins,
 
-      new AssetsWebpackPlugin({
-        fullPath: true,
-        filename: 'dist/manifest.json'
+      new LoadablePlugin({
+        filename: 'manifest.json'
       })
     ]
     : [...plugins]

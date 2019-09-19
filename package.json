@@ -11,10 +11,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:server": "cross-env NODE_ENV=development nodemon server/index.ts",
-    "start:bundle": "cross-env NODE_ENV=development webpack-dev-server --config src/config/webpack.config.js --hot --inline --mode development",
+    "start:bundle": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.js --hot --inline --mode development",
     "start": "npm run start:bundle | npm run start:server",
-    "build:bundle:dev": "cross-env NODE_ENV=development webpack --config src/config/webpack.config.js --mode development",
-    "build:bundle:prod": "cross-env NODE_ENV=production webpack --config src/config/webpack.config.js --mode production",
+    "build:bundle:dev": "cross-env NODE_ENV=development webpack --config config/webpack.config.js --mode development",
+    "build:bundle:prod": "cross-env NODE_ENV=production webpack --config config/webpack.config.js --mode production",
     "build": "npm run clean && npm run build:bundle:prod",
     "clean:dev": "node scripts/clean.js dev",
     "clean:prod": "node scripts/clean.js prod",
@@ -80,6 +80,7 @@
     "webpack-dev-server": "3.1.14"
   },
   "dependencies": {
+    "@loadable/webpack-plugin": "^5.7.1",
     "autoprefixer": "^9.6.1",
     "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.3",
