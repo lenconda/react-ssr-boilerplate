@@ -10,15 +10,10 @@
   "author": "lenconda",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:server": "cross-env NODE_ENV=development nodemon server/index.ts",
-    "start:bundle": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.js --hot --inline --mode development",
-    "start": "npm run start:bundle | npm run start:server",
-    "build:bundle:dev": "cross-env NODE_ENV=development webpack --config config/webpack.config.js --mode development",
-    "build:bundle:prod": "cross-env NODE_ENV=production webpack --config config/webpack.config.js --mode production",
-    "build": "npm run clean && npm run build:bundle:prod",
-    "clean:dev": "node scripts/clean.js dev",
-    "clean:prod": "node scripts/clean.js prod",
-    "clean": "npm run clean:dev && npm run clean:prod"
+    "start": "nodemon src/server/index.ts",
+    "build:bundle": "cross-env NODE_ENV=production webpack --config config/webpack.config.js --mode production",
+    "build": "npm run clean && npm run build:bundle",
+    "clean": "node scripts/clean.js"
   },
   "browserslist": [
     "last 1 version",

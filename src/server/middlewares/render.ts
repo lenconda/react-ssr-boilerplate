@@ -11,7 +11,7 @@ export default (templateBasePath: string) => {
     ctx.response.render = ctx.render = (file: string, entry: string, options: object = {}) => {
       ctx.type = 'text/html';
       const raw = fs.readFileSync(path.join(templateBasePath, file), { encoding: 'utf8' });
-      const source = injectTemplate(raw, entry);
+      const source = injectTemplate(raw, entry, ctx);
       const compiled = handlebars.compile(source);
       const html = compiled(options);
       ctx.body = html;

@@ -134,7 +134,7 @@ module.exports = {
       ...plugins,
 
       new LoadablePlugin({
-        filename: 'manifest.json'
+        filename: 'manifest.json',
       })
     ]
     : [...plugins]
