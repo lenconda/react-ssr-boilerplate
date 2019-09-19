@@ -64,12 +64,12 @@ start()
       await next();
     });
 
-    app.use(render(path.join(__dirname, '../templates')));
+    app.use(render(path.join(__dirname, '../../templates')));
     app.use(kcors());
     app.use(bodyParser());
 
     glob
-      .sync(path.join(__dirname, 'routes/**/index.{ts,tsx}}'), {
+      .sync(path.join(__dirname, 'routes/**/index.{ts,tsx}'), {
         realpath: true,
         absolute: false
       })

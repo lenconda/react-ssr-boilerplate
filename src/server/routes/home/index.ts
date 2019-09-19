@@ -14,4 +14,8 @@ router.get('/hello', async (ctx, next) => {
   });
 });
 
+router.get('/test', async (ctx, next) => {
+  ctx.body = ctx.state.webpackStats.toJson();
+});
+
 export default router;
