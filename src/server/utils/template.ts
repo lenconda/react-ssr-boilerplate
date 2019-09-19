@@ -9,7 +9,7 @@ export const injectTemplate = (content: string, entry: string, context: Context)
   const manifest = serverConfig.isDev
     ? context.state.webpackStats.toJson()
     : JSON.parse(fs.readFileSync(
-      path.join(__dirname, '../../dist/manifest.json'),
+      path.join(__dirname, '../../../dist/manifest.json'),
       { encoding: 'utf8' }
     ) || '{}');
 

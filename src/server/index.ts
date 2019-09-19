@@ -10,8 +10,7 @@ import glob from 'glob';
 import render from './middlewares/render';
 import webpack from 'webpack';
 import koaWebpack from 'koa-webpack';
-import webpackConfig from '../../config/webpack.config';
-import portsConfig from '../../config/ports.config';
+import webpackConfig from '../../config/webpack.dev';
 import serverConfig from '../../config/server.config';
 
 const fixedWebpack: any = webpack;
@@ -21,6 +20,7 @@ const bootstrap = {
   prod: async () => {
     const app = new Koa();
 
+    app.use(serve(path.join(__dirname, '../../dist/assets')));
     app.use(serve(path.join(__dirname, '../../dist')));
 
     return app;
@@ -83,5 +83,5 @@ start()
 
     return app;
   })
-  .then(app => app.listen(portsConfig.port.server))
+  .then(app => app.listen(5000))
   .catch(err => console.log(err));
